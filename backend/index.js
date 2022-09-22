@@ -1,14 +1,33 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-require('dotenv').config()
+require("dotenv").config();
+const mongoose = require("mongoose");
+const cors = require("cors");
 
+dbUrl = process.env.MONGO_URL;
 
-const checklistRoutes = require('./routes/checklistRoutes')
+mongoose
+  .connect(dbUrl || "mongodb://localhost:27017/myapp")
+  .then(console.log("connected to mongo"))
+  .catch((err) => "Problem connecting to database" + err);
 
-const port = process.env.PORT
+var corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
-app.use('/', checklistRoutes)
+const checklistRoutes = require("./routes/checklistRoutes");
 
-app.listen(port || '4000', (req, res) => {
-    console.log('listening on port 4000')  
-})
+const port = process.env.PORT;
+
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//routes
+app.use("/", checklistRoutes);
+
+app.listen(port || "4000", (req, res) => {
+  console.log("listening on port 4000");
+});

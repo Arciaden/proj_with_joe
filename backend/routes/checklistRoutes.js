@@ -1,7 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const checklistController = require('../controllers/checklistController');
+const checklistController = require("../controllers/checklistController");
 
-router.route('/checklist').get(checklistController.index)
+router
+  .route("/checklist")
+  .get(checklistController.index)
+  .post(checklistController.createItem);
+
+router
+  .route("/checklist/:id")
+  .delete(checklistController.deleteItem)
+  .patch(checklistController.updateItem);
 
 module.exports = router;

@@ -1,0 +1,7 @@
+Next steps
+1. details routes
+2. Build Navigation
+3. Build Index Page UI
+4. Build create checklist form
+5. Build update / delete checklist form
+6. Build Details Page UI

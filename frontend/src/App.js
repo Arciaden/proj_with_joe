@@ -1,10 +1,14 @@
-import './App.css';
+import "./index.css";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import ChecklistIndex from "./pages/index";
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ChecklistIndex />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
