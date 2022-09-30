@@ -1,4 +1,5 @@
 const express = require("express");
+const { check } = require("prettier");
 const router = express.Router();
 const checklistController = require("../controllers/checklistController");
 
@@ -9,6 +10,7 @@ router
 
 router
   .route("/checklist/:id")
+  .get(checklistController.details)
   .delete(checklistController.deleteItem)
   .patch(checklistController.updateItem);
 

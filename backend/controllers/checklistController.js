@@ -9,6 +9,16 @@ module.exports.index = async (req, res) => {
   }
 };
 
+module.exports.details = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const details = await Checklist.findById(id);
+    res.status(200).json(details);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports.createItem = async (req, res) => {
   const { title, description, completed } = req.body;
   console.log(req.body);

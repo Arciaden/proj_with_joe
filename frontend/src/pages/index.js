@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import InfoIcon from "@mui/icons-material/Info";
+import { Box } from "@mui/system";
 
 const ChecklistIndex = () => {
   const [checklist, setChecklist] = useState("");
@@ -16,16 +19,45 @@ const ChecklistIndex = () => {
   }, []);
 
   return (
-    <div>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+      }}
+    >
       {checklist &&
         checklist.map((list) => (
-          <>
+          <Box
+            className="checklist-card"
+            sx={{
+              position: "relative",
+              width: 0.4,
+              padding: 3,
+              marginY: 5,
+              borderRadius: 2,
+            }}
+          >
+            <Link to={`checklist/${list._id}`}>
+              <Box
+                sx={{
+                  width: 50,
+                  height: 50,
+                  position: "absolute",
+                  top: 8,
+                  right: -15,
+                }}
+              >
+                <InfoIcon sx={{ color: "gray" }} />
+              </Box>
+            </Link>
             <h1>{list.title}</h1>
             <h2>{list.description}</h2>
             <input type="checkbox" checked={list.completed} />
-          </>
+          </Box>
         ))}
-    </div>
+    </Box>
   );
 };
 
